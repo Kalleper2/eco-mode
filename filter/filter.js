@@ -24,19 +24,63 @@ function saveCheckboxState() {
     });
 }
 
-// Funktion til at indlæse checkbox-status fra localStorage
+// Funktion til at indlæse checkbox-status fra localStorage og vise det korrekte billede
 function loadCheckboxState() {
     let checkboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]');
     checkboxes.forEach((checkbox) => {
         let isChecked = localStorage.getItem(checkbox.id) === 'true';
         checkbox.checked = isChecked;
     });
+
+    // Indlæs det korrekte billede baseret på checkbox-status
+    if (localStorage.getItem('lowResolution') === 'true') {
+        switchToLowResolutionImage();
+    } else {
+        switchToHighResolutionImage();
+    }
 }
 
 // Kald funktionen til at indlæse checkbox-status ved sideindlæsning
-document.addEventListener('DOMContentLoaded', loadCheckboxState);
+document.addEventListener('DOMContentLoaded', function() {
+    loadCheckboxState();
 
-// Tilføj event listeners til checkboxes for at gemme status ved ændring
-document.querySelectorAll('.dropdown-content input[type="checkbox"]').forEach((checkbox) => {
-    checkbox.addEventListener('change', saveCheckboxState);
+    // Tilføj event listener til 'Lav opløsning' checkbox
+    let lowResCheckbox = document.getElementById('lowResolution');
+    if (lowResCheckbox) {
+        lowResCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                localStorage.setItem('lowResolution', 'true');
+                switchToLowResolutionImage();
+            } else {
+                localStorage.setItem('lowResolution', 'false');
+                switchToHighResolutionImage();
+            }
+        });
+    }
 });
+
+// Funktion til at skifte til lavopløsningsbilledet
+function switchToLowResolutionImage() {
+    let img = document.getElementById('dynamicImage');
+    if (!img) {
+        img = document.createElement('img');
+        img.id = 'dynamicImage';
+        img.className = 'dynamic-image';
+        document.getElementById('imageContainer').appendChild(img);
+    }
+    img.src = '/wp-content/uploads/pexels-minan1398-1230157-scaled-1-low.jpg';
+    img.alt = 'Low resolution example';
+}
+
+// Funktion til at skifte til højopløsningsbilledet
+function switchToHighResolutionImage() {
+    let img = document.getElementById('dynamicImage');
+    if (!img) {
+        img = document.createElement('img');
+        img.id = 'dynamicImage';
+        img.className = 'dynamic-image';
+        document.getElementById('imageContainer').appendChild(img);
+    }
+    img.src = '/wp-content/uploads/pexels-minan1398-1230157-scaled-1.jpg';
+    img.alt = 'High resolution example';
+}
