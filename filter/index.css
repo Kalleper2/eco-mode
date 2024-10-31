@@ -1,0 +1,70 @@
+/* Styling for dropdown header with icon and text */
+.dropdown-header {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-color: #45AB21;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+    color: white;
+}
+
+/* Adding padding to the left of "Eco-mode" text */
+.dropdown-header span {
+    padding-left: 15px; /* Adjust padding-left as needed */
+}
+
+/* Styling for Eco-mode icon */
+.eco-mode-icon {
+    width: 50px; /* Adjust icon size as needed */
+    height: 50px;
+    vertical-align: middle;
+}
+
+/* Styling for dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 160px;
+}
+
+/* Dropdown content (now with high z-index to appear in front) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    width: 100%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    border-top: none;
+    z-index: 9999; 
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+/* Styling each option in dropdown content */
+.dropdown-content label {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Styling checkboxes in dropdown */
+.dropdown-content input[type="checkbox"] {
+    margin-right: 10px;
+    accent-color: #6deb3f; /* Change checkbox color to match the green */
+}
+
+/* Hover effect for each option in dropdown */
+.dropdown-content label:hover {
+    background-color: #f1f1f1;
+}
+
+/* Class to show dropdown menu */
+.show {
+    display: block;
+}
