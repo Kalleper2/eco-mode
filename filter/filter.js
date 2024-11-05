@@ -24,7 +24,7 @@ function saveCheckboxState() {
     });
 }
 
-// Funktion til at indlæse checkbox-status fra localStorage og vise det korrekte billede
+// Funktion til at indlæse checkbox-status fra localStorage og vise de korrekte billeder
 function loadCheckboxState() {
     let checkboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]');
     checkboxes.forEach((checkbox) => {
@@ -32,11 +32,11 @@ function loadCheckboxState() {
         checkbox.checked = isChecked;
     });
 
-    // Indlæs det korrekte billede baseret på checkbox-status
+    // Indlæs de korrekte billeder baseret på checkbox-status
     if (localStorage.getItem('lowResolution') === 'true') {
-        switchToLowResolutionImage();
+        showLowResolutionImages();
     } else {
-        switchToHighResolutionImage();
+        showHighResolutionImages();
     }
 }
 
@@ -50,37 +50,57 @@ document.addEventListener('DOMContentLoaded', function() {
         lowResCheckbox.addEventListener('change', function() {
             if (this.checked) {
                 localStorage.setItem('lowResolution', 'true');
-                switchToLowResolutionImage();
+                showLowResolutionImages();
             } else {
                 localStorage.setItem('lowResolution', 'false');
-                switchToHighResolutionImage();
+                showHighResolutionImages();
             }
         });
     }
 });
 
-// Funktion til at skifte til lavopløsningsbilledet
-function switchToLowResolutionImage() {
-    let img = document.getElementById('dynamicImage');
-    if (!img) {
-        img = document.createElement('img');
-        img.id = 'dynamicImage';
+// Funktion til at vise lavopløsningsbillederne
+function showLowResolutionImages() {
+    let imageContainers = document.querySelectorAll('.image-container');
+    imageContainers.forEach((container) => {
+        container.innerHTML = ''; // Tøm containeren først
+
+        let img = document.createElement('img');
         img.className = 'dynamic-image';
-        document.getElementById('imageContainer').appendChild(img);
-    }
-    img.src = '/wp-content/uploads/pexels-minan1398-1230157-scaled-1-low.jpg';
-    img.alt = 'Low resolution example';
+        img.style.borderRadius = '5px'; // Tilføj border radius
+
+        // Tilføj billede med lav opløsning baseret på containerens id
+        if (container.id === 'imageContainer1') {
+            img.src = '/wp-content/uploads/pexels-minan1398-1230157-scaled-1-low.jpg';
+            img.alt = 'Low resolution example 1';
+        } else if (container.id === 'imageContainer2') {
+            img.src = '/wp-content/uploads/pexels-akilmazumder-1072824-scaled-low.jpg';
+            img.alt = 'Low resolution example 2';
+        }
+
+        container.appendChild(img);
+    });
 }
 
-// Funktion til at skifte til højopløsningsbilledet
-function switchToHighResolutionImage() {
-    let img = document.getElementById('dynamicImage');
-    if (!img) {
-        img = document.createElement('img');
-        img.id = 'dynamicImage';
+// Funktion til at vise højopløsningsbillederne
+function showHighResolutionImages() {
+    let imageContainers = document.querySelectorAll('.image-container');
+    imageContainers.forEach((container) => {
+        container.innerHTML = ''; // Tøm containeren først
+
+        let img = document.createElement('img');
         img.className = 'dynamic-image';
-        document.getElementById('imageContainer').appendChild(img);
-    }
-    img.src = '/wp-content/uploads/pexels-minan1398-1230157-scaled-1.jpg';
-    img.alt = 'High resolution example';
+        img.style.borderRadius = '5px'; // Tilføj border radius
+
+        // Tilføj billede med høj opløsning baseret på containerens id
+        if (container.id === 'imageContainer1') {
+            img.src = '/wp-content/uploads/pexels-minan1398-1230157-scaled-1.jpg';
+            img.alt = 'High resolution example 1';
+        } else if (container.id === 'imageContainer2') {
+            img.src = '/wp-content/uploads/pexels-akilmazumder-1072824-scaled.jpg';
+            img.alt = 'High resolution example 2';
+        }
+
+        container.appendChild(img);
+    });
 }
