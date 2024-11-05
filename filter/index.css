@@ -23,6 +23,23 @@
     vertical-align: middle;
 }
 
+.elementor-1070 .elementor-element.elementor-element-d34a5bf {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.background-container {
+    width: 100%; /* Juster størrelsen som ønsket */
+    height: 1000px; /* Juster højden som ønsket */
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px; /* Tilføj border radius hvis ønsket */
+    filter: brightness(75%) contrast(100%) saturate(100%) hue-rotate(0deg);
+    background-repeat: no-repeat;
+}
+
+
 /* Styling for dropdown container */
 .dropdown {
     position: relative;

@@ -32,11 +32,13 @@ function loadCheckboxState() {
         checkbox.checked = isChecked;
     });
 
-    // Indlæs de korrekte billeder baseret på checkbox-status
+    // Indlæs de korrekte billeder og baggrundsbilleder baseret på checkbox-status
     if (localStorage.getItem('lowResolution') === 'true') {
         showLowResolutionImages();
+        switchCottonbroToLowRes(); // Skift billedet "cottonbro" til lav opløsning
     } else {
         showHighResolutionImages();
+        switchCottonbroToHighRes(); // Skift billedet "cottonbro" til høj opløsning
     }
 }
 
@@ -51,13 +53,31 @@ document.addEventListener('DOMContentLoaded', function() {
             if (this.checked) {
                 localStorage.setItem('lowResolution', 'true');
                 showLowResolutionImages();
+                switchCottonbroToLowRes(); // Skift billedet "cottonbro" til lav opløsning
             } else {
                 localStorage.setItem('lowResolution', 'false');
                 showHighResolutionImages();
+                switchCottonbroToHighRes(); // Skift billedet "cottonbro" til høj opløsning
             }
         });
     }
 });
+
+// Funktion til at skifte baggrundsbilledet "cottonbro" til lav opløsning
+function switchCottonbroToLowRes() {
+    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-d34a5bf');
+    elements.forEach((element) => {
+        element.style.backgroundImage = 'url(/wp-content/uploads/pexels-cottonbro-4065876-scaled-1-low.jpg)';
+    });
+}
+
+// Funktion til at skifte baggrundsbilledet "cottonbro" til høj opløsning
+function switchCottonbroToHighRes() {
+    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-d34a5bf');
+    elements.forEach((element) => {
+        element.style.backgroundImage = 'url(/wp-content/uploads/pexels-cottonbro-4065876-scaled-1.jpg)';
+    });
+}
 
 // Funktion til at vise lavopløsningsbillederne
 function showLowResolutionImages() {
@@ -67,7 +87,7 @@ function showLowResolutionImages() {
 
         let img = document.createElement('img');
         img.className = 'dynamic-image';
-        img.style.borderRadius = '5px'; // Tilføj border radius
+        img.style.borderRadius = '10px'; // Tilføj border radius
 
         // Tilføj billede med lav opløsning baseret på containerens id
         if (container.id === 'imageContainer1') {
@@ -90,7 +110,7 @@ function showHighResolutionImages() {
 
         let img = document.createElement('img');
         img.className = 'dynamic-image';
-        img.style.borderRadius = '5px'; // Tilføj border radius
+        img.style.borderRadius = '10px'; // Tilføj border radius
 
         // Tilføj billede med høj opløsning baseret på containerens id
         if (container.id === 'imageContainer1') {
