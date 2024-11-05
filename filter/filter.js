@@ -35,10 +35,18 @@ function loadCheckboxState() {
     // Indlæs de korrekte billeder og baggrundsbilleder baseret på checkbox-status
     if (localStorage.getItem('lowResolution') === 'true') {
         showLowResolutionImages();
-        switchCottonbroToLowRes(); // Skift billedet "cottonbro" til lav opløsning
+        switchCottonbroToLowRes();
+        switchSingkhamToLowRes();
+        switchCookiecutterToLowRes();
+        switchPixabayToLowRes();
+        switchPokRieToLowRes();
     } else {
         showHighResolutionImages();
-        switchCottonbroToHighRes(); // Skift billedet "cottonbro" til høj opløsning
+        switchCottonbroToHighRes();
+        switchSingkhamToHighRes();
+        switchCookiecutterToHighRes();
+        switchPixabayToHighRes();
+        switchPokRieToHighRes();
     }
 }
 
@@ -53,11 +61,19 @@ document.addEventListener('DOMContentLoaded', function() {
             if (this.checked) {
                 localStorage.setItem('lowResolution', 'true');
                 showLowResolutionImages();
-                switchCottonbroToLowRes(); // Skift billedet "cottonbro" til lav opløsning
+                switchCottonbroToLowRes();
+                switchSingkhamToLowRes();
+                switchCookiecutterToLowRes();
+                switchPixabayToLowRes();
+                switchPokRieToLowRes();
             } else {
                 localStorage.setItem('lowResolution', 'false');
                 showHighResolutionImages();
-                switchCottonbroToHighRes(); // Skift billedet "cottonbro" til høj opløsning
+                switchCottonbroToHighRes();
+                switchSingkhamToHighRes();
+                switchCookiecutterToHighRes();
+                switchPixabayToHighRes();
+                switchPokRieToHighRes();
             }
         });
     }
@@ -79,6 +95,70 @@ function switchCottonbroToHighRes() {
     });
 }
 
+// Funktion til at skifte baggrundsbilledet "singkham" til lav opløsning
+function switchSingkhamToLowRes() {
+    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-a5b6558');
+    elements.forEach((element) => {
+        element.style.backgroundImage = 'url(/wp-content/uploads/pexels-singkham-178541-1108572-scaled-low.jpg)';
+    });
+}
+
+// Funktion til at skifte baggrundsbilledet "singkham" til høj opløsning
+function switchSingkhamToHighRes() {
+    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-a5b6558');
+    elements.forEach((element) => {
+        element.style.backgroundImage = 'url(/wp-content/uploads/pexels-singkham-178541-1108572-scaled-1.jpg)';
+    });
+}
+
+// Funktion til at skifte baggrundsbilledet "cookiecutter" til lav opløsning
+function switchCookiecutterToLowRes() {
+    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-feb7617');
+    elements.forEach((element) => {
+        element.style.backgroundImage = 'url(/wp-content/uploads/pexels-cookiecutter-1148820-scaled-low.jpg)';
+    });
+}
+
+// Funktion til at skifte baggrundsbilledet "cookiecutter" til høj opløsning
+function switchCookiecutterToHighRes() {
+    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-feb7617');
+    elements.forEach((element) => {
+        element.style.backgroundImage = 'url(/wp-content/uploads/pexels-cookiecutter-1148820-scaled-1.jpg)';
+    });
+}
+
+// Funktion til at skifte baggrundsbilledet "pixabay" til lav opløsning
+function switchPixabayToLowRes() {
+    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-837457b');
+    elements.forEach((element) => {
+        element.style.backgroundImage = 'url(/wp-content/uploads/pexels-pixabay-433308-scaled-low.jpg)';
+    });
+}
+
+// Funktion til at skifte baggrundsbilledet "pixabay" til høj opløsning
+function switchPixabayToHighRes() {
+    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-837457b');
+    elements.forEach((element) => {
+        element.style.backgroundImage = 'url(/wp-content/uploads/pexels-pixabay-433308-scaled-1.jpg)';
+    });
+}
+
+// Funktion til at skifte baggrundsbilledet "pok-rie" til lav opløsning
+function switchPokRieToLowRes() {
+    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-6497dba');
+    elements.forEach((element) => {
+        element.style.backgroundImage = 'url(/wp-content/uploads/pexels-pok-rie-33563-189524-scaled-low.jpg)';
+    });
+}
+
+// Funktion til at skifte baggrundsbilledet "pok-rie" til høj opløsning
+function switchPokRieToHighRes() {
+    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-6497dba');
+    elements.forEach((element) => {
+        element.style.backgroundImage = 'url(/wp-content/uploads/pexels-pok-rie-33563-189524-scaled-1.jpg)';
+    });
+}
+
 // Funktion til at vise lavopløsningsbillederne
 function showLowResolutionImages() {
     let imageContainers = document.querySelectorAll('.image-container');
@@ -96,6 +176,9 @@ function showLowResolutionImages() {
         } else if (container.id === 'imageContainer2') {
             img.src = '/wp-content/uploads/pexels-akilmazumder-1072824-scaled-low.jpg';
             img.alt = 'Low resolution example 2';
+        } else if (container.id === 'imageContainer3') {
+            img.src = '/wp-content/uploads/pexels-minan1398-1006115-low.jpg';
+            img.alt = 'Low resolution example 3';
         }
 
         container.appendChild(img);
@@ -119,8 +202,12 @@ function showHighResolutionImages() {
         } else if (container.id === 'imageContainer2') {
             img.src = '/wp-content/uploads/pexels-akilmazumder-1072824-scaled.jpg';
             img.alt = 'High resolution example 2';
+        } else if (container.id === 'imageContainer3') {
+            img.src = '/wp-content/uploads/pexels-minan1398-1006115.jpg';
+            img.alt = 'High resolution example 3';
         }
 
         container.appendChild(img);
     });
 }
+
