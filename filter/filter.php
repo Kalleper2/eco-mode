@@ -11,7 +11,7 @@ function simple_link_dropdown_shortcode() {
         <div id="myDropdown" class="dropdown-content">
             <label>
                 <input type="checkbox" id="lowResolution">
-                Lav opløsning på billederasfasdf
+                Lav opløsning på billeder
             </label>
             <label>
                 <input type="checkbox" id="adaptiveImages">
