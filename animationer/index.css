@@ -8,18 +8,7 @@
     }
 }
 
-/* Skjul elementerne ved start */
-.elementor-heading-title,
-p,
-.elementor-icon-list-items,
-.elementor-icon-list-item,
-.elementor-button {
-    opacity: 0; /* Start usynlig */
-    transition: opacity 1.5s ease-in;
-}
-
 /* Klasse der aktiverer animationen */
 .fade-in {
-    opacity: 1;
     animation: fadeIn 1.5s ease-in forwards;
 }

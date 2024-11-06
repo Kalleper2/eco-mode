@@ -48,13 +48,56 @@ function loadCheckboxState() {
         switchPixabayToHighRes();
         switchPokRieToHighRes();
     }
+
+    // Kontroller og deaktiver animationer, hvis de er slået fra
+    toggleAnimations();
 }
 
-// Kald funktionen til at indlæse checkbox-status ved sideindlæsning
+// Funktion til at aktivere/deaktivere animationer baseret på "Deaktiverede effekter" checkbox
+function toggleAnimations() {
+    const fadeElements = document.querySelectorAll('.elementor-heading-title, p, .elementor-icon-list-items, .elementor-icon-list-item, .elementor-button');
+
+    if (localStorage.getItem('disableEffects') === 'true') {
+        fadeElements.forEach(element => {
+            element.classList.remove('fade-in'); // Fjern fade-in klassen
+            element.style.opacity = 1; // Gør synlig uden animation
+        });
+    } else {
+        // Hvis effekter ikke er deaktiveret, tilføj observer for fade-in
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in'); // Tilføj fade-in klassen
+                    observer.unobserve(entry.target); // Stop observeringen for at spare ressourcer
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Opdater checkbox-status ved indlæsning
     loadCheckboxState();
 
-    // Tilføj event listener til 'Lav opløsning' checkbox
+    // Tilføj event listener til "Deaktiverede effekter" checkbox
+    let disableEffectsCheckbox = document.getElementById('disableEffects');
+    if (disableEffectsCheckbox) {
+        // Sæt initial værdi fra localStorage
+        disableEffectsCheckbox.checked = localStorage.getItem('disableEffects') === 'true';
+
+        // Håndter ændringer uden at genindlæse
+        disableEffectsCheckbox.addEventListener('change', function() {
+            localStorage.setItem('disableEffects', disableEffectsCheckbox.checked);
+            toggleAnimations(); // Kald funktionen direkte for at anvende ændringen i realtid
+        });
+    }
+
+
+    // Tilføj event listener til "Lav opløsning" checkbox
     let lowResCheckbox = document.getElementById('lowResolution');
     if (lowResCheckbox) {
         lowResCheckbox.addEventListener('change', function() {
@@ -78,6 +121,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+
 
 // Funktion til at skifte baggrundsbilledet "cottonbro" til lav opløsning
 function switchCottonbroToLowRes() {
