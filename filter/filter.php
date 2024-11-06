@@ -14,12 +14,8 @@ function simple_link_dropdown_shortcode() {
                 Lav opløsning på billeder
             </label>
             <label>
-                <input type="checkbox" id="adaptiveImages">
-                Mindre billedstørrelser
-            </label>
-            <label>
                 <input type="checkbox" id="disableEffects">
-                Deaktiverede effekter
+                Deaktiver animationer
             </label>
         </div>
     </div>
