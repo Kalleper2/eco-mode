@@ -53,6 +53,22 @@ function eco_mode_enqueue_assets() {
         null,
         true
     );
+
+    wp_enqueue_style(
+        'animationer-css',
+        plugins_url('animationer/index.css', __FILE__),
+        array(),
+        null
+    );
+
+    // Enqueue filter JavaScript
+    wp_enqueue_script(
+        'animationer-js',
+        plugins_url('animationer/animationer.js', __FILE__),
+        array(),
+        null,
+        true
+    );
 }
 add_action('wp_enqueue_scripts', 'eco_mode_enqueue_assets');
 
