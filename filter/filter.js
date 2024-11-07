@@ -1,7 +1,49 @@
-// Funktion til at vise/skjule dropdown
 function toggleDropdown() {
-    document.getElementById("myDropdown").classList.toggle("show");
+    const dropdown = document.getElementById("myDropdown");
+
+    if (dropdown.classList.contains("show")) {
+        // Start lukkeanimation
+        dropdown.style.opacity = "0";
+        dropdown.style.transform = "translateY(-10px)";
+
+        // Vent på, at transitionen afsluttes, før vi skjuler elementet
+        setTimeout(() => {
+            dropdown.classList.remove("show");
+            dropdown.style.visibility = "hidden";
+        }, 300); // 300 ms svarer til transition-tiden i CSS
+    } else {
+        // Åbn dropdown
+        dropdown.classList.add("show");
+        dropdown.style.opacity = "1";
+        dropdown.style.transform = "translateY(0)";
+        dropdown.style.visibility = "visible";
+    }
 }
+
+// Luk dropdownen, når der klikkes udenfor
+window.addEventListener('click', function(event) {
+    const dropdown = document.getElementById("myDropdown");
+    const dropdownHeader = document.querySelector('.dropdown-header');
+
+    // Tjek om klikket ikke er på dropdown-headeren eller dropdown-indholdet
+    if (!dropdownHeader.contains(event.target) && !dropdown.contains(event.target)) {
+        if (dropdown.classList.contains("show")) {
+            // Start lukkeanimation
+            dropdown.style.opacity = "0";
+            dropdown.style.transform = "translateY(-10px)";
+
+            // Vent på, at transitionen afsluttes, før vi skjuler elementet
+            setTimeout(() => {
+                dropdown.classList.remove("show");
+                dropdown.style.visibility = "hidden";
+            }, 300); // 300 ms svarer til transition-tiden i CSS
+        }
+    }
+});
+
+
+
+
 
 // Luk dropdownen, når der klikkes udenfor
 window.onclick = function(event) {
