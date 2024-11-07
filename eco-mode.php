@@ -69,6 +69,22 @@ function eco_mode_enqueue_assets() {
         null,
         true
     );
+
+    wp_enqueue_style(
+        'dark-mode-css',
+        plugins_url('dark-mode/index.css', __FILE__),
+        array(),
+        null
+    );
+
+    // Enqueue filter JavaScript
+    wp_enqueue_script(
+        'dark-mode.js',
+        plugins_url('dark-mode/dark-mode.js', __FILE__),
+        array(),
+        null,
+        true
+    );
 }
 add_action('wp_enqueue_scripts', 'eco_mode_enqueue_assets');
 
