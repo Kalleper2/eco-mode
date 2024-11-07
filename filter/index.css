@@ -8,6 +8,12 @@
     cursor: pointer;
     border-radius: 10px;
     color: white;
+    transition: background-color 0.3s ease; /* Glidende overgang for baggrundsfarve */
+}
+
+/* Hover effect for dropdown header */
+.dropdown-header:hover {
+    background-color: #388E1B !important; /* Hover farve */
 }
 
 /* Adding padding to the left of "Eco-mode" text */
@@ -21,6 +27,9 @@
     height: 50px;
     vertical-align: middle;
 }
+
+/* (Resten af din CSS forbliver uændret) */
+
 
 .background-container {
     width: 100%; /* Juster størrelsen som ønsket */

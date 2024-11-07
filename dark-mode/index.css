@@ -6,7 +6,7 @@
 }
 
 .dark-mode {
-    --eco-background: #1a1a1a; /* Sort til Dark Mode */
+    --eco-background: #45AB21; /* Sort til Dark Mode */
     --widget-background-color: #1a1a1a !important; /* Mørk grå baggrund til widget i Dark Mode */
     --text-color: #ffffff !important; /* Hvid tekstfarve i Dark Mode */
     --additional-text-color: #1a1a1a !important; /* Mørk grå farve for ekstra tekst i Dark Mode */
