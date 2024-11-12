@@ -1,0 +1,135 @@
+:root {
+    --eco-background: #45AB21; /* Grøn standardfarve til dropdown */
+    --widget-background-color: var(--e-global-color-4b52a7c); /* Standardfarve til widget */
+    --text-color: inherit; /* Behold den arvede tekstfarve som standard */
+    --additional-text-color: inherit; /* Standard farve for den ekstra tekst */
+}
+
+.dark-mode {
+    --eco-background: #45AB21; /* Sort til Dark Mode */
+    --widget-background-color: #1a1a1a !important; /* Mørk grå baggrund til widget i Dark Mode */
+    --text-color: #ffffff !important; /* Hvid tekstfarve i Dark Mode */
+    --additional-text-color: #1a1a1a !important; /* Mørk grå farve for ekstra tekst i Dark Mode */
+}
+
+/* Brug variablerne */
+.dropdown-header {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-color: var(--eco-background); /* Brug variabel */
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+    color: var(--text-color); /* Anvend variabel til tekstfarve */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Glidende overgang til farveskift */
+}
+
+.elementor-1070 .elementor-element.elementor-element-7696ae0:not(.elementor-motion-effects-element-type-background),
+.elementor-1070 .elementor-element.elementor-element-7696ae0 > .elementor-motion-effects-container > .elementor-motion-effects-layer {
+    background-color: var(--widget-background-color) !important; /* Anvender variabel for dynamisk farve */
+    transition: background-color 0.3s ease; /* Glidende overgang */
+}
+
+/* Sørg for at teksten også skifter farve i Dark Mode */
+.elementor-widget-text-editor,
+.elementor-heading-title,
+.elementor-widget-container p, /* Tilføjet selector for p-elementet */
+.elementor-heading-title.elementor-size-default { /* Tilføjet selector for h2-elementet */
+    color: var(--text-color); /* Anvend variabel til tekstfarve */
+    transition: color 0.3s ease; /* Glidende overgang for tekstfarve */
+}
+
+/* Specific CSS for the additional text that needs to change color in dark mode */
+.additional-text {
+    color: var(--additional-text-color); /* Anvend variabel til den ekstra tekstfarve */
+    transition: color 0.3s ease; /* Glidende overgang for ekstra tekstfarve */
+}
+
+.dark-mode .elementor-element-f41b7a8 .elementor-heading-title {
+    color: white !important; /* Sætter tekstfarven til hvid i dark mode */
+}
+
+.dark-mode .elementor-element-db2b961 .elementor-heading-title,
+.dark-mode .elementor-element-521b659 .elementor-heading-title {
+    color: white !important; /* Sætter tekstfarven til hvid i dark mode */
+}
+
+.dark-mode .elementor-element-65e144d .elementor-icon-list-text {
+    color: white !important; /* Sætter tekstfarven til hvid i dark mode */
+}
+
+
+/* Baggrundsfarve, som ændres i dark mode */
+.elementor-1070 .elementor-element.elementor-element-d34a5bf {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 0.25); /* Standard baggrundsfarve */
+    background-blend-mode: multiply; /* Kombinerer farven og billedet */
+}
+
+/* Specifik regel for baggrundsfarven, når dark mode er aktiv */
+.dark-mode .elementor-1070 .elementor-element.elementor-element-d34a5bf {
+    background-color: rgba(0, 0, 0, 0.75) !important; /* Mørkere baggrund i dark mode */
+}
+
+/* Specifik regel for den container, der skal blive sort i dark mode */
+.dark-mode .elementor-element.elementor-element-842dbd1 {
+    background-color: #265750 !important; /* Sort baggrund i dark mode */
+}
+
+.elementor-element.elementor-element-842dbd1 {
+    background-color: #265750 !important; /* Sort baggrund i dark mode */
+}
+
+/* Specifik regel for den container, der skal blive sort i dark mode */
+.dark-mode .elementor-element.elementor-element-c149cb5 {
+    background-color: #1a1a1a !important; /* Mørk grå baggrund i dark mode */
+}
+
+/* Specifik regel for den container, der skal blive sort i dark mode */
+.dark-mode .elementor-element.elementor-element-78f1c30 {
+    background-color: #1a1a1a !important; /* Mørk grå baggrund i dark mode */
+}
+
+/* Specifik regel for den container, der skal blive sort i dark mode */
+.dark-mode .elementor-element.elementor-element-432ec20 {
+    background-color: #1a1a1a !important; /* Mørk grå baggrund i dark mode */
+}
+
+.dark-mode .elementor-element-8888824 {
+    background-color: #1a1a1a !important; /* Mørk grå baggrund i dark mode */
+}
+
+.elementor-element-e0c55b2 .elementor-widget-container p {
+    color: white !important; /* Gør teksten hvid uanset dark mode */
+}
+
+.elementor-element-b0c2232 .elementor-shortcode {
+    color: white !important; /* Gør teksten hvid uanset dark mode */
+}
+
+.dark-mode .elementor-element-56458df .elementor-heading-title {
+    color: white !important; /* Sætter tekstfarven til hvid i dark mode */
+}
+
+.dark-mode .elementor-icon-list-text {
+    color: white !important; /* Sætter tekstfarven til hvid i dark mode */
+}
+
+.dark-mode .elementor-icon-list-item a:hover .elementor-icon-list-text {
+    color: #45AB21 !important; /* Sætter hover-farven til #45AB21 i dark mode */
+}
+
+.dark-mode .elementor-element-bb02a14 .elementor-heading-title {
+    color: white !important; /* Sætter tekstfarven til hvid i dark mode */
+}
+
+.dark-mode .elementor-element-7ebda1e .elementor-icon-list-text {
+    color: white !important; /* Sætter tekstfarven til hvid i dark mode */
+}
+
+.dark-mode .elementor-element-7ebda1e .elementor-icon-list-item:hover .elementor-icon-list-text {
+    color: #45AB21 !important; /* Sætter hover farven til grøn i dark mode */
+}

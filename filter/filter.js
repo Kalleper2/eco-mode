@@ -1,7 +1,49 @@
-// Funktion til at vise/skjule dropdown
 function toggleDropdown() {
-    document.getElementById("myDropdown").classList.toggle("show");
+    const dropdown = document.getElementById("myDropdown");
+
+    if (dropdown.classList.contains("show")) {
+        // Start lukkeanimation
+        dropdown.style.opacity = "0";
+        dropdown.style.transform = "translateY(-10px)";
+
+        // Vent på, at transitionen afsluttes, før vi skjuler elementet
+        setTimeout(() => {
+            dropdown.classList.remove("show");
+            dropdown.style.visibility = "hidden";
+        }, 300); // 300 ms svarer til transition-tiden i CSS
+    } else {
+        // Åbn dropdown
+        dropdown.classList.add("show");
+        dropdown.style.opacity = "1";
+        dropdown.style.transform = "translateY(0)";
+        dropdown.style.visibility = "visible";
+    }
 }
+
+// Luk dropdownen, når der klikkes udenfor
+window.addEventListener('click', function(event) {
+    const dropdown = document.getElementById("myDropdown");
+    const dropdownHeader = document.querySelector('.dropdown-header');
+
+    // Tjek om klikket ikke er på dropdown-headeren eller dropdown-indholdet
+    if (!dropdownHeader.contains(event.target) && !dropdown.contains(event.target)) {
+        if (dropdown.classList.contains("show")) {
+            // Start lukkeanimation
+            dropdown.style.opacity = "0";
+            dropdown.style.transform = "translateY(-10px)";
+
+            // Vent på, at transitionen afsluttes, før vi skjuler elementet
+            setTimeout(() => {
+                dropdown.classList.remove("show");
+                dropdown.style.visibility = "hidden";
+            }, 300); // 300 ms svarer til transition-tiden i CSS
+        }
+    }
+});
+
+
+
+
 
 // Luk dropdownen, når der klikkes udenfor
 window.onclick = function(event) {
@@ -24,13 +66,18 @@ function saveCheckboxState() {
     });
 }
 
-// Funktion til at indlæse checkbox-status fra localStorage og vise de korrekte billeder
+// Funktion til at indlæse checkbox-status fra localStorage
 function loadCheckboxState() {
     let checkboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]');
     checkboxes.forEach((checkbox) => {
         let isChecked = localStorage.getItem(checkbox.id) === 'true';
         checkbox.checked = isChecked;
     });
+
+    // Anvend Dark Mode, hvis det er slået til
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+    }
 
     // Indlæs de korrekte billeder og baggrundsbilleder baseret på checkbox-status
     if (localStorage.getItem('lowResolution') === 'true') {
@@ -53,22 +100,21 @@ function loadCheckboxState() {
     toggleAnimations();
 }
 
-// Funktion til at aktivere/deaktivere animationer baseret på "Deaktiverede effekter" checkbox
+// Funktion til at aktivere/deaktivere animationer
 function toggleAnimations() {
     const fadeElements = document.querySelectorAll('.elementor-heading-title, p, .elementor-icon-list-items, .elementor-icon-list-item, .elementor-button');
 
     if (localStorage.getItem('disableEffects') === 'true') {
         fadeElements.forEach(element => {
-            element.classList.remove('fade-in'); // Fjern fade-in klassen
-            element.style.opacity = 1; // Gør synlig uden animation
+            element.classList.remove('fade-in');
+            element.style.opacity = 1;
         });
     } else {
-        // Hvis effekter ikke er deaktiveret, tilføj observer for fade-in
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in'); // Tilføj fade-in klassen
-                    observer.unobserve(entry.target); // Stop observeringen for at spare ressourcer
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.1 });
@@ -83,21 +129,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Opdater checkbox-status ved indlæsning
     loadCheckboxState();
 
-    // Tilføj event listener til "Deaktiverede effekter" checkbox
+    // Event listener til "Deaktiverede effekter" checkbox
     let disableEffectsCheckbox = document.getElementById('disableEffects');
     if (disableEffectsCheckbox) {
-        // Sæt initial værdi fra localStorage
         disableEffectsCheckbox.checked = localStorage.getItem('disableEffects') === 'true';
-
-        // Håndter ændringer uden at genindlæse
         disableEffectsCheckbox.addEventListener('change', function() {
             localStorage.setItem('disableEffects', disableEffectsCheckbox.checked);
-            toggleAnimations(); // Kald funktionen direkte for at anvende ændringen i realtid
+            toggleAnimations();
         });
     }
 
-
-    // Tilføj event listener til "Lav opløsning" checkbox
+    // Event listener til "Lav opløsning" checkbox
     let lowResCheckbox = document.getElementById('lowResolution');
     if (lowResCheckbox) {
         lowResCheckbox.addEventListener('change', function() {
@@ -120,11 +162,30 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Event listener til "Dark Mode" checkbox
+    let darkModeCheckbox = document.getElementById('darkMode');
+    if (darkModeCheckbox) {
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+            darkModeCheckbox.checked = true;
+        }
+
+        darkModeCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', 'true');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', 'false');
+            }
+            // Opdaterer baggrundsfarven ved skift
+            loadCheckboxState();
+        });
+    }
 });
 
-
-
-// Funktion til at skifte baggrundsbilledet "cottonbro" til lav opløsning
+// Funktioner til at skifte billeder afhængigt af opløsning
 function switchCottonbroToLowRes() {
     let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-d34a5bf');
     elements.forEach((element) => {
@@ -132,7 +193,6 @@ function switchCottonbroToLowRes() {
     });
 }
 
-// Funktion til at skifte baggrundsbilledet "cottonbro" til høj opløsning
 function switchCottonbroToHighRes() {
     let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-d34a5bf');
     elements.forEach((element) => {
@@ -140,7 +200,6 @@ function switchCottonbroToHighRes() {
     });
 }
 
-// Funktion til at skifte baggrundsbilledet "singkham" til lav opløsning
 function switchSingkhamToLowRes() {
     let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-a5b6558');
     elements.forEach((element) => {
@@ -148,7 +207,6 @@ function switchSingkhamToLowRes() {
     });
 }
 
-// Funktion til at skifte baggrundsbilledet "singkham" til høj opløsning
 function switchSingkhamToHighRes() {
     let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-a5b6558');
     elements.forEach((element) => {
@@ -156,7 +214,6 @@ function switchSingkhamToHighRes() {
     });
 }
 
-// Funktion til at skifte baggrundsbilledet "cookiecutter" til lav opløsning
 function switchCookiecutterToLowRes() {
     let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-feb7617');
     elements.forEach((element) => {
@@ -164,7 +221,6 @@ function switchCookiecutterToLowRes() {
     });
 }
 
-// Funktion til at skifte baggrundsbilledet "cookiecutter" til høj opløsning
 function switchCookiecutterToHighRes() {
     let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-feb7617');
     elements.forEach((element) => {
@@ -172,7 +228,6 @@ function switchCookiecutterToHighRes() {
     });
 }
 
-// Funktion til at skifte baggrundsbilledet "pixabay" til lav opløsning
 function switchPixabayToLowRes() {
     let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-837457b');
     elements.forEach((element) => {
@@ -180,7 +235,6 @@ function switchPixabayToLowRes() {
     });
 }
 
-// Funktion til at skifte baggrundsbilledet "pixabay" til høj opløsning
 function switchPixabayToHighRes() {
     let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-837457b');
     elements.forEach((element) => {
@@ -188,7 +242,6 @@ function switchPixabayToHighRes() {
     });
 }
 
-// Funktion til at skifte baggrundsbilledet "pok-rie" til lav opløsning
 function switchPokRieToLowRes() {
     let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-6497dba');
     elements.forEach((element) => {
@@ -196,7 +249,6 @@ function switchPokRieToLowRes() {
     });
 }
 
-// Funktion til at skifte baggrundsbilledet "pok-rie" til høj opløsning
 function switchPokRieToHighRes() {
     let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-6497dba');
     elements.forEach((element) => {
@@ -212,9 +264,8 @@ function showLowResolutionImages() {
 
         let img = document.createElement('img');
         img.className = 'dynamic-image';
-        img.style.borderRadius = '10px'; // Tilføj border radius
+        img.style.borderRadius = '10px';
 
-        // Tilføj billede med lav opløsning baseret på containerens id
         if (container.id === 'imageContainer1') {
             img.src = '/wp-content/uploads/pexels-minan1398-1230157-scaled-1-low.jpg';
             img.alt = 'Low resolution example 1';
@@ -234,13 +285,12 @@ function showLowResolutionImages() {
 function showHighResolutionImages() {
     let imageContainers = document.querySelectorAll('.image-container');
     imageContainers.forEach((container) => {
-        container.innerHTML = ''; // Tøm containeren først
+        container.innerHTML = '';
 
         let img = document.createElement('img');
         img.className = 'dynamic-image';
-        img.style.borderRadius = '10px'; // Tilføj border radius
+        img.style.borderRadius = '10px';
 
-        // Tilføj billede med høj opløsning baseret på containerens id
         if (container.id === 'imageContainer1') {
             img.src = '/wp-content/uploads/pexels-minan1398-1230157-scaled-1.jpg';
             img.alt = 'High resolution example 1';
@@ -255,4 +305,3 @@ function showHighResolutionImages() {
         container.appendChild(img);
     });
 }
-
