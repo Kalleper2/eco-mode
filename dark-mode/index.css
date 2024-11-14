@@ -133,3 +133,6 @@
 .dark-mode .elementor-element-7ebda1e .elementor-icon-list-item:hover .elementor-icon-list-text {
     color: #45AB21 !important; /* Sætter hover farven til grøn i dark mode */
 }
+.dark-mode .elementor-icon-list-item:hover .elementor-icon-list-text {
+    color: #45AB21 !important; /* Green hover color in dark mode */
+}
