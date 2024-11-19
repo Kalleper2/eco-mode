@@ -2,17 +2,14 @@ function toggleDropdown() {
     const dropdown = document.getElementById("myDropdown");
 
     if (dropdown.classList.contains("show")) {
-        // Start lukkeanimation
         dropdown.style.opacity = "0";
         dropdown.style.transform = "translateY(-10px)";
 
-        // Vent på, at transitionen afsluttes, før vi skjuler elementet
         setTimeout(() => {
             dropdown.classList.remove("show");
             dropdown.style.visibility = "hidden";
-        }, 300); // 300 ms svarer til transition-tiden i CSS
+        }, 300);
     } else {
-        // Åbn dropdown
         dropdown.classList.add("show");
         dropdown.style.opacity = "1";
         dropdown.style.transform = "translateY(0)";
@@ -28,7 +25,6 @@ window.addEventListener('click', function(event) {
     // Tjek om klikket ikke er på dropdown-headeren eller dropdown-indholdet
     if (!dropdownHeader.contains(event.target) && !dropdown.contains(event.target)) {
         if (dropdown.classList.contains("show")) {
-            // Start lukkeanimation
             dropdown.style.opacity = "0";
             dropdown.style.transform = "translateY(-10px)";
 
@@ -36,16 +32,11 @@ window.addEventListener('click', function(event) {
             setTimeout(() => {
                 dropdown.classList.remove("show");
                 dropdown.style.visibility = "hidden";
-            }, 300); // 300 ms svarer til transition-tiden i CSS
+            }, 300);
         }
     }
 });
 
-
-
-
-
-// Luk dropdownen, når der klikkes udenfor
 window.onclick = function(event) {
     if (!event.target.closest('.dropdown-header') && !event.target.closest('.dropdown-content')) {
         let dropdowns = document.getElementsByClassName("dropdown-content");
