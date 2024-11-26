@@ -139,6 +139,7 @@ function eco_mode_register_settings() {
 // Callback til at vise sektionen
 function eco_mode_settings_section_callback() {
     echo '<p>Tilpas Eco Mode indstillingerne her.</p>';
+    echo '<p><strong>Bemærk:</strong> Dette plugin er designet som en demonstrationsløsning og kræver manuel tilpasning i koden og CSS klasser for at fungere optimalt på andre hjemmesider. Billeder skal tilhøre CSS klassen "eco-image".</p>';
 }
 
 // Callback til Dark Mode feltet
