@@ -178,72 +178,88 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Funktioner til at skifte billeder afhængigt af opløsning
 function switchCottonbroToLowRes() {
-    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-d34a5bf');
+    let elements = document.querySelectorAll('.eco-image-cottonbro');
     elements.forEach((element) => {
         element.style.backgroundImage = 'url(/wp-content/uploads/pexels-cottonbro-4065876-scaled-1-low.jpg)';
     });
 }
 
 function switchCottonbroToHighRes() {
-    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-d34a5bf');
+    let elements = document.querySelectorAll('.eco-image-cottonbro');
     elements.forEach((element) => {
         element.style.backgroundImage = 'url(/wp-content/uploads/pexels-cottonbro-4065876-scaled-1.jpg)';
     });
 }
 
 function switchSingkhamToLowRes() {
-    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-a5b6558');
+    let elements = document.querySelectorAll('.eco-image-singkham');
     elements.forEach((element) => {
         element.style.backgroundImage = 'url(/wp-content/uploads/pexels-singkham-178541-1108572-scaled-low.jpg)';
     });
 }
 
 function switchSingkhamToHighRes() {
-    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-a5b6558');
+    let elements = document.querySelectorAll('.eco-image-singkham');
     elements.forEach((element) => {
         element.style.backgroundImage = 'url(/wp-content/uploads/pexels-singkham-178541-1108572-scaled-1.jpg)';
     });
 }
 
 function switchCookiecutterToLowRes() {
-    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-feb7617');
+    let elements = document.querySelectorAll('.eco-image-cookiecutter');
     elements.forEach((element) => {
         element.style.backgroundImage = 'url(/wp-content/uploads/pexels-cookiecutter-1148820-scaled-low.jpg)';
     });
 }
 
 function switchCookiecutterToHighRes() {
-    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-feb7617');
+    let elements = document.querySelectorAll('.eco-image-cookiecutter');
     elements.forEach((element) => {
         element.style.backgroundImage = 'url(/wp-content/uploads/pexels-cookiecutter-1148820-scaled-1.jpg)';
     });
 }
 
 function switchPixabayToLowRes() {
-    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-837457b');
+    let elements = document.querySelectorAll('.eco-image-pixabay');
     elements.forEach((element) => {
         element.style.backgroundImage = 'url(/wp-content/uploads/pexels-pixabay-433308-scaled-low.jpg)';
     });
 }
 
 function switchPixabayToHighRes() {
-    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-837457b');
+    let elements = document.querySelectorAll('.eco-image-pixabay');
     elements.forEach((element) => {
         element.style.backgroundImage = 'url(/wp-content/uploads/pexels-pixabay-433308-scaled-1.jpg)';
     });
 }
 
 function switchPokRieToLowRes() {
-    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-6497dba');
+    let elements = document.querySelectorAll('.eco-image-pokrie');
     elements.forEach((element) => {
         element.style.backgroundImage = 'url(/wp-content/uploads/pexels-pok-rie-33563-189524-scaled-low.jpg)';
     });
 }
 
 function switchPokRieToHighRes() {
-    let elements = document.querySelectorAll('.elementor-1070 .elementor-element.elementor-element-6497dba');
+    let elements = document.querySelectorAll('.eco-image-pokrie');
     elements.forEach((element) => {
         element.style.backgroundImage = 'url(/wp-content/uploads/pexels-pok-rie-33563-189524-scaled-1.jpg)';
+    });
+}
+
+// Funktion til at vise lavopløsningsbilleder
+function showLowResolutionImages() {
+    let ecoImages = document.querySelectorAll('.eco-image');
+    ecoImages.forEach((image) => {
+        image.src = image.getAttribute('data-low-res');
+    });
+}
+
+// Funktion til at vise højopløsningsbilleder
+function showHighResolutionImages() {
+    let ecoImages = document.querySelectorAll('.eco-image');
+    ecoImages.forEach((image) => {
+        image.src = image.getAttribute('data-high-res');
     });
 }
 
